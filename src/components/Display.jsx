@@ -2,7 +2,9 @@ import React from 'react'
 
 function Display() {
   return (
-    <div>Display</div>
+    <div className='Display'>
+      {value}
+    </div>
   )
 }
 

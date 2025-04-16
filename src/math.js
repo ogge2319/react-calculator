@@ -4,7 +4,7 @@ export function calculate(a, operator, b) {
         case '+': return a + b
         case '-': return a - b
         case '*': return a * b
-        case '/': return b === 0 ? fel : a / b
+        case '/': return b === 0 ? "fel" : a / b
 
         default: return 'fel'
     }
