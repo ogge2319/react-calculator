@@ -1,45 +1,51 @@
-import { useState } from 'react'
-import ButtonPanel from './components/ButtonPanel'
-import Display from './components/Display'
-import { calculate } from './math'
+import { useState } from 'react';
+import ButtonPanel from './components/ButtonPanel';
+import Display from './components/Display';
+import { calculate } from './math';
 
 function App() {
-  const [input, setInput] = useState("")
-  const [firstNum, setFirstNum] = useState(null)
-  const [operator, setOperator] = useState(null)
+  const [input, setInput] = useState('');
+  const [firstNum, setFirstNum] = useState(null);
+  const [operator, setOperator] = useState(null);
+  const [expression, setExpression] = useState('');
 
   const handleClick = (label) => {
+    if (!isNaN(label) || label === '.') {
 
-    if (!isNaN(label)) {
-      setInput(input + label)
+      setInput(prev => prev + label);
 
-    }else if (['+','-','*','/'].includes(label)) {
+    } else if (['+', '-', '*', '/'].includes(label)) {
 
-      setFirstNum(Number(input))
-      setOperator(label)
-      setInput("")
+      if (input === '') return;
+      setFirstNum(parseFloat(input));
+      setOperator(label);
+      setExpression(`${input} ${label}`);
+      setInput('');
+      
+    } else if (label === '=') {
 
-    }else if (label === "=") {
-
-      const result = calculate(firstNum, operator, Number(input));
-      setInput(result);
+      const result = calculate(firstNum, operator, parseFloat(input));
+      setExpression(prev => `${prev} ${input} = ${result}`);
+      setInput(String(result));
       setFirstNum(null);
       setOperator(null);
 
-    }else if(label === "C") {
+    } else if (label === 'C') {
 
       setInput('');
       setFirstNum(null);
       setOperator(null);
+      setExpression('');
 
     }
-  }
+  };
+
   return (
     <div className='Calculator'>
-      <Display value= {input} />
-      <ButtonPanel onButtonClick={handleClick}/>
+      <Display value={input} expression={expression} />
+      <ButtonPanel onButtonClick={handleClick} />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
