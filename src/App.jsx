@@ -21,7 +21,7 @@ function App() {
       setOperator(label);
       setExpression(`${input} ${label}`);
       setInput('');
-      
+
     } else if (label === '=') {
 
       const result = calculate(firstNum, operator, parseFloat(input));
@@ -37,6 +37,21 @@ function App() {
       setOperator(null);
       setExpression('');
 
+    }
+    else if (label === '⌫') {
+
+      if (input.length > 0) {
+        setInput(prev => prev.slice(0, -1));
+
+      } else if (operator && expression) {
+
+        const updatedExpression = expression.slice(0, expression.lastIndexOf(' '));
+        setExpression('');
+        setInput(String(firstNum));
+        setFirstNum(null);
+        setOperator(null);
+        
+      }
     }
   };
 
