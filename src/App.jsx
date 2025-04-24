@@ -9,27 +9,35 @@ function App() {
   const [operator, setOperator] = useState(null)
 
   const handleClick = (label) => {
+
     if (!isNaN(label)) {
-      
+      setInput(input + label)
+
     }else if (['+','-','*','/'].includes(label)) {
 
+      setFirstNum(Number(input))
+      setOperator(label)
+      setInput("")
+
     }else if (label === "=") {
+
       const result = calculate(firstNum, operator, Number(input));
       setInput(result);
       setFirstNum(null);
       setOperator(null);
 
     }else if(label === "C") {
+
       setInput('');
       setFirstNum(null);
       setOperator(null);
+
     }
   }
   return (
     <div className='Calculator'>
-      <Button />
-      <ButtonPanel />
-      <Display />
+      <Display value= {input} />
+      <ButtonPanel onButtonClick={handleClick}/>
     </div>
   )
 }
