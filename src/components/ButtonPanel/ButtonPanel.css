@@ -1,6 +1,13 @@
 .button-panel {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 60px 60px 60px 60px 60px;
     gap: 8px;
+    grid-template-areas: 
+    "seven eight nine plus"
+    "four five six minus"
+    "one two three times"
+    "zero zero dot back"
+    "clear clear equals divide ";  
   }
   

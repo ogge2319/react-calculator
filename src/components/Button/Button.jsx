@@ -1,12 +1,18 @@
 import React from 'react'
 import "./Button.css"
 
-function Button({label, onClick}) {
+
+
+function Button({ label, onClick, gridArea, type }) {
   return (
-    <button onClick={() => onClick(label)}>
+    <button 
+      className={type}
+      style={{ gridArea: gridArea }} 
+      onClick={() => onClick(label)}
+    >
       {label}
     </button>
-  )
+  );
 }
 
 export default Button

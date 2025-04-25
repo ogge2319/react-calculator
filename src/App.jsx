@@ -12,11 +12,16 @@ function App() {
   const [expression, setExpression] = useState('');
 
   const handleClick = (label) => {
-    if (!isNaN(label) || label === '.') {
+    if (!isNaN(label)) {
 
       setInput(prev => prev + label);
 
-    } else if (['+', '-', '*', '/'].includes(label)) {
+    } else if (label === '.') {
+      if (!input.includes('.')) {
+        setInput(prev => prev + label);
+      }
+    }
+    else if (['+', '-', '*', '/'].includes(label)) {
 
       if (input === '') return;
       setFirstNum(parseFloat(input));
@@ -52,7 +57,7 @@ function App() {
         setInput(String(firstNum));
         setFirstNum(null);
         setOperator(null);
-        
+
       }
     }
   };

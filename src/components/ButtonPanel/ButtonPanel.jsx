@@ -5,21 +5,48 @@ import "./ButtonPanel.css"
 function ButtonPanel({ onButtonClick }) {
 
   const buttons = [
-    '7', '8', '9', '+',
-    '4', '5', '6', '-',
-    '1', '2', '3', '*',
-    '0','.','⌫', 'C',
-    '=', '/'
+    { label: '7', area: 'seven' },
+    { label: '8', area: 'eight' },
+    { label: '9', area: 'nine' },
+    { label: '+', area: 'plus' },
+    { label: '4', area: 'four' },
+    { label: '5', area: 'five' },
+    { label: '6', area: 'six' },
+    { label: '-', area: 'minus' },
+    { label: '1', area: 'one' },
+    { label: '2', area: 'two' },
+    { label: '3', area: 'three' },
+    { label: '*', area: 'times' },
+    { label: '0', area: 'zero' },
+    { label: '.', area: 'dot' },
+    { label: '⌫', area: 'back' },
+    { label: 'C', area: 'clear' },
+    { label: '=', area: 'equals' },
+    { label: '/', area: 'divide' },
   ];
+
+  const getButtonType = (label) => {
+    if (label === '=') return 'operator equals';
+    if (label === 'C') return 'function clear';
+    if (['+', '-', '*', '/'].includes(label)) return 'operator';
+    if (label === '⌫') return 'backspace';
+    return null;
+  };
 
 
   return (
     <div className='button-panel'>
-      {buttons.map((label) => (
-        <Button key={label} label={label} onClick={onButtonClick} />
+      {buttons.map((btn) => (
+        <Button
+          key={btn.label}
+          label={btn.label}
+          onClick={onButtonClick}
+          type={getButtonType(btn.label)}
+          gridArea={btn.area}
+        />
       ))}
     </div>
-  )
+  );
 }
 
 export default ButtonPanel
