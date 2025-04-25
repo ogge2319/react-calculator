@@ -1,5 +1,6 @@
 import React from 'react'
-import Button from './Button'
+import Button from '../Button/Button'
+import "./ButtonPanel.css"
 
 function ButtonPanel({ onButtonClick }) {
 
@@ -13,9 +14,9 @@ function ButtonPanel({ onButtonClick }) {
 
 
   return (
-    <div className='ButtonPanel'>
-      {buttons.map((btn) => (
-        <Button key={btn} label={btn} onClick={onButtonClick} />
+    <div className='button-panel'>
+      {buttons.map((label) => (
+        <Button key={label} label={label} onClick={onButtonClick} />
       ))}
     </div>
   )

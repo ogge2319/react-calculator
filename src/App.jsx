@@ -1,7 +1,9 @@
 import { useState } from 'react';
-import ButtonPanel from './components/ButtonPanel';
-import Display from './components/Display';
+import ButtonPanel from './components/ButtonPanel/ButtonPanel';
+import Display from './components/Display/Display';
 import { calculate } from './math';
+import "./Index.css"
+
 
 function App() {
   const [input, setInput] = useState('');

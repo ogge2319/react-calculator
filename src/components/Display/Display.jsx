@@ -1,5 +1,5 @@
 import React from 'react';
-
+import "./Display.css"
 function Display({ value, expression }) {
   return (
     <div className="display">
