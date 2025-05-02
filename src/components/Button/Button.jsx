@@ -1,18 +1,15 @@
-import React from 'react'
-import "./Button.css"
+import './Button.css';
 
-
-
-function Button({ label, onClick, gridArea, type }) {
+function Button({ label, onClick, type, gridArea }) {
   return (
-    <button 
+    <button
       className={type}
-      style={{ gridArea: gridArea }} 
-      onClick={() => onClick(label)}
-    >
+      style={{ gridArea: gridArea }}
+      onClick={() => onClick(label)}>
+
       {label}
     </button>
   );
 }
 
-export default Button
+export default Button;

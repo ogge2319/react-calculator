@@ -1,11 +1,10 @@
-import React from 'react';
-import "./Display.css"
-function Display({ value, expression }) {
+import './Display.css';
+
+function Display({ expression, result }) {
   return (
     <div className="display">
-      <div className="value">
-        {expression.includes("=") ? expression : `${expression} ${value}`}
-      </div>
+      <div className="expression">{expression}</div>
+      {result !== '' && <div className="value">= {result}</div>}
     </div>
   );
 }

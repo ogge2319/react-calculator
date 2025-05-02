@@ -1,9 +1,8 @@
-import React from 'react'
-import Button from '../Button/Button'
-import "./ButtonPanel.css"
+import React from 'react';
+import Button from '../Button/Button';
+import './ButtonPanel.css';
 
 function ButtonPanel({ onButtonClick }) {
-
   const buttons = [
     { label: '7', area: 'seven' },
     { label: '8', area: 'eight' },
@@ -22,20 +21,19 @@ function ButtonPanel({ onButtonClick }) {
     { label: '⌫', area: 'back' },
     { label: 'C', area: 'clear' },
     { label: '=', area: 'equals' },
-    { label: '/', area: 'divide' },
+    { label: '/', area: 'divide' }
   ];
 
   const getButtonType = (label) => {
-    if (label === '=') return 'operator equals';
-    if (label === 'C') return 'function clear';
+    if (label === '=') return 'equals';
+    if (label === 'C') return 'clear';
     if (['+', '-', '*', '/'].includes(label)) return 'operator';
     if (label === '⌫') return 'backspace';
     return null;
   };
 
-
   return (
-    <div className='button-panel'>
+    <div className="button-panel">
       {buttons.map((btn) => (
         <Button
           key={btn.label}
@@ -49,4 +47,4 @@ function ButtonPanel({ onButtonClick }) {
   );
 }
 
-export default ButtonPanel
+export default ButtonPanel;

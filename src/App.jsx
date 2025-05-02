@@ -1,70 +1,34 @@
 import { useState } from 'react';
 import ButtonPanel from './components/ButtonPanel/ButtonPanel';
 import Display from './components/Display/Display';
-import { calculate } from './math';
-import "./Index.css"
-
+import './Index.css';
 
 function App() {
-  const [input, setInput] = useState('');
-  const [firstNum, setFirstNum] = useState(null);
-  const [operator, setOperator] = useState(null);
   const [expression, setExpression] = useState('');
+  const [result, setResult] = useState('');
 
   const handleClick = (label) => {
-    if (!isNaN(label)) {
-
-      setInput(prev => prev + label);
-
-    } else if (label === '.') {
-      if (!input.includes('.')) {
-        setInput(prev => prev + label);
-      }
-    }
-    else if (['+', '-', '*', '/'].includes(label)) {
-
-      if (input === '') return;
-      setFirstNum(parseFloat(input));
-      setOperator(label);
-      setExpression(`${input} ${label}`);
-      setInput('');
-
-    } else if (label === '=') {
-
-      const result = calculate(firstNum, operator, parseFloat(input));
-      setExpression(prev => `${prev} ${input} = ${result}`);
-      setInput(String(result));
-      setFirstNum(null);
-      setOperator(null);
-
-    } else if (label === 'C') {
-
-      setInput('');
-      setFirstNum(null);
-      setOperator(null);
+    if (label === 'C') {
       setExpression('');
-
-    }
-    else if (label === '⌫') {
-
-      if (input.length > 0) {
-        setInput(prev => prev.slice(0, -1));
-
-      } else if (operator && expression) {
-
-        const updatedExpression = expression.slice(0, expression.lastIndexOf(' '));
-        setExpression('');
-        setInput(String(firstNum));
-        setFirstNum(null);
-        setOperator(null);
-
+      setResult('');
+    } else if (label === '⌫') {
+      setExpression(prev => prev.slice(0, -1));
+    } else if (label === '=') {
+      try {
+        const evalResult = eval(expression);
+        setResult(evalResult);
+      } catch (e) {
+        setResult('Fel');
       }
+    } else {
+      setExpression(prev => prev + label);
+      setResult('');
     }
   };
 
   return (
     <div className='Calculator'>
-      <Display value={input} expression={expression} />
+      <Display expression={expression} result={result} />
       <ButtonPanel onButtonClick={handleClick} />
     </div>
   );
