@@ -6,22 +6,56 @@ import './Index.css';
 function App() {
   const [expression, setExpression] = useState('');
   const [result, setResult] = useState('');
+ 
 
   const handleClick = (label) => {
-    if (label === 'C') {
-      setExpression('');
-      setResult('');
-    } else if (label === '⌫') {
-      setExpression(prev => prev.slice(0, -1));
-    } else if (label === '=') {
-      try {
-        const evalResult = eval(expression);
-        setResult(evalResult);
-      } catch (e) {
-        setResult('Fel');
+    const operators = ['+', '-', '*', '/'];
+
+
+    setExpression(prev => {
+      const lastChar = prev.slice(-1);
+
+      if (label === 'C') {
+        setResult('');
+        return '';
       }
-    } else {
-      setExpression(prev => prev + label);
+
+    
+      if (label === '⌫') {
+        return prev.slice(0, -1);
+      }
+
+     
+      if (label === '=') {
+        try {
+          const evalResult = eval(prev);
+          setResult(evalResult);
+        } catch {
+          setResult('Fel');
+        }
+        return prev;
+      }
+
+
+      if (operators.includes(label)) {
+        if (prev === '' || operators.includes(lastChar)) {
+          return prev; 
+        }
+      }
+
+
+      if (label === '.') {
+        const parts = prev.split(/[\+\-\*\/]/);
+        const currentNumber = parts[parts.length - 1];
+        if (currentNumber.includes('.')) {
+          return prev;
+        }
+      }
+
+      return prev + label;
+    });
+
+    if (label !== '=' && label !== '⌫') {
       setResult('');
     }
   };
